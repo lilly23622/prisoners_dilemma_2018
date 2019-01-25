@@ -9,7 +9,7 @@
 team_name = 'helpus' # Only 10 chars displayed.
 strategy_name = "plagiarism"
 strategy_description = 'collude first round, collude unless betrayed then betray # of times betrayed'
-
+#b_count is number of betrayals by opponent#
 b_count = 0
 
 def move(my_history, their_history, my_score, their_score):
@@ -45,15 +45,14 @@ def move(my_history, their_history, my_score, their_score):
         global b_count
         b_count=0
         return 'c'
+    elif len(my_history)>=100 and their_history.count('b')>=100:
+        return 'b'
+    elif len(my_history)>=75:
+        return 'c'
     elif their_history[-1]=='b':
         b_count=their_history.count('b')
         b_count -= 1
-        return 'b'
-    elif b_count>0:
-        b_count -= 1
-        return 'b'
-    elif len(my_history)>=100 and their_history.count('c')>=100:
-        return 'b'
+        return 'b'   
     else:
         return 'c' 
 
